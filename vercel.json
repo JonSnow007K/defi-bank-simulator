@@ -1,5 +1,4 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "installCommand": "npm install --omit=dev"
+  "buildCommand": "npm ci --omit=dev && npm run build",
+  "outputDirectory": "dist"
 }
