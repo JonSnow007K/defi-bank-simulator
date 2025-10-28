@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import type { UserAccount, TransactionType, BalanceData } from '../types';
@@ -18,7 +17,7 @@ const Dashboard: React.FC<DashboardProps> = ({ account, balanceHistory, onAction
       return (
         <div className="bg-gray-700/80 p-2 border border-gray-600 rounded-md shadow-lg">
           <p className="label text-sm text-gray-300">{`${label}`}</p>
-          <p className="intro text-white font-bold">{`Balance: $${payload[0].value.toLocaleString()}`}</p>
+          <p className="intro text-white font-bold">{`Balance: ₹${payload[0].value.toLocaleString()}`}</p>
         </div>
       );
     }
@@ -31,7 +30,7 @@ const Dashboard: React.FC<DashboardProps> = ({ account, balanceHistory, onAction
         {/* Balance Card */}
         <div className="bg-gray-800/50 p-6 rounded-xl border border-gray-700">
           <h2 className="text-gray-400 text-sm font-medium mb-2">Total Balance</h2>
-          <p className="text-4xl font-bold text-white">${account.balance.toLocaleString()}</p>
+          <p className="text-4xl font-bold text-white">₹{account.balance.toLocaleString()}</p>
           <p className="text-green-400 text-sm mt-1">+2.5% vs last month</p>
         </div>
 
@@ -59,7 +58,7 @@ const Dashboard: React.FC<DashboardProps> = ({ account, balanceHistory, onAction
             >
               <CartesianGrid strokeDasharray="3 3" stroke="#4A5568" />
               <XAxis dataKey="name" stroke="#A0AEC0" />
-              <YAxis stroke="#A0AEC0" tickFormatter={(value) => `$${Number(value).toLocaleString()}`} />
+              <YAxis stroke="#A0AEC0" tickFormatter={(value) => `₹${Number(value).toLocaleString()}`} />
               <Tooltip content={<CustomTooltip />} />
               <defs>
                 <linearGradient id="colorBalance" x1="0" y1="0" x2="0" y2="1">

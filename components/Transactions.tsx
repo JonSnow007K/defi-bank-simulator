@@ -25,7 +25,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
       return (
         <div className="bg-gray-700/80 p-2 border border-gray-600 rounded-md shadow-lg">
           <p className="label text-sm text-gray-300">{`Address: ${label}`}</p>
-          <p className="intro text-white font-bold">{`Balance: $${payload[0].value.toLocaleString()}`}</p>
+          <p className="intro text-white font-bold">{`Balance: ₹${payload[0].value.toLocaleString()}`}</p>
         </div>
       );
     }
@@ -42,7 +42,7 @@ const Transactions: React.FC<{ transactions: Transaction[], tokenHolders: TokenH
   }));
 
   const transactionVolume = transactions.map(t => ({
-      date: new Date(t.date).toLocaleDateString(),
+      date: t.date,
       amount: t.amount
   })).reverse();
 
@@ -58,7 +58,7 @@ const Transactions: React.FC<{ transactions: Transaction[], tokenHolders: TokenH
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <StatCard icon={<TransactionsIcon className="w-6 h-6"/>} title="Total Transactions" value={transactions.length.toLocaleString()} />
             <StatCard icon={<UsersIcon className="w-6 h-6"/>} title="Active Participants" value={activeParticipants.toLocaleString()} />
-            <StatCard icon={<LockClosedIcon className="w-6 h-6"/>} title="Total Value Locked" value={`$${totalValueLocked.toLocaleString()}`} />
+            <StatCard icon={<LockClosedIcon className="w-6 h-6"/>} title="Total Value Locked" value={`₹${totalValueLocked.toLocaleString()}`} />
         </div>
 
         {/* Charts */}
@@ -69,7 +69,7 @@ const Transactions: React.FC<{ transactions: Transaction[], tokenHolders: TokenH
                     <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={formattedTokenHolders} layout="vertical" margin={{ top: 5, right: 20, left: 50, bottom: 5 }}>
                             <CartesianGrid strokeDasharray="3 3" stroke="#4A5568" horizontal={false} />
-                            <XAxis type="number" stroke="#A0AEC0" tickFormatter={(value) => `$${Number(value/1000000).toFixed(1)}M`} />
+                            <XAxis type="number" stroke="#A0AEC0" tickFormatter={(value) => `₹${Number(value/1000000).toFixed(1)}M`} />
                             <YAxis type="category" dataKey="name" stroke="#A0AEC0" width={70} />
                             <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(37, 99, 235, 0.1)' }}/>
                             <Bar dataKey="balance" fill="#2563EB" radius={[0, 4, 4, 0]} />
@@ -89,15 +89,15 @@ const Transactions: React.FC<{ transactions: Transaction[], tokenHolders: TokenH
                                 <XAxis
                                 dataKey="date"
                                 stroke="#A0AEC0"
-                                tickFormatter={(dateString) => {
-                                    const date = new Date(dateString);
-                                    return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
-                                }}
+                                angle={-45}
+                                textAnchor="end"
+                                height={80}
+                                interval={0}
                                 />
 
                                 <YAxis
                                 stroke="#A0AEC0"
-                                tickFormatter={(value) => `$${Number(value / 1000).toFixed(0)}k`}
+                                tickFormatter={(value) => `₹${Number(value / 1000).toFixed(0)}k`}
                                 />
                                 <Tooltip
                                 content={({ active, payload, label }) =>
@@ -105,7 +105,7 @@ const Transactions: React.FC<{ transactions: Transaction[], tokenHolders: TokenH
                                     <div className="bg-gray-700/80 p-2 border border-gray-600 rounded-md shadow-lg">
                                         <p className="text-sm text-gray-300">{label}</p>
                                         <p className="text-white font-bold">
-                                        {`Volume: $${payload[0].value.toLocaleString()}`}
+                                        {`Volume: ₹${payload[0].value.toLocaleString()}`}
                                         </p>
                                     </div>
                                     ) : null
@@ -155,7 +155,7 @@ const Transactions: React.FC<{ transactions: Transaction[], tokenHolders: TokenH
                     <td className="px-6 py-4 font-mono text-blue-400 whitespace-nowrap">{`${tx.id.substring(0, 10)}...`}</td>
                     <td className="px-6 py-4 whitespace-nowrap">{tx.date}</td>
                     <td className="px-6 py-4 font-medium">{tx.action}</td>
-                    <td className={`px-6 py-4 font-semibold ${getActionColor(tx.action)}`}>{`$${tx.amount.toLocaleString()}`}</td>
+                    <td className={`px-6 py-4 font-semibold ${getActionColor(tx.action)}`}>{`₹${tx.amount.toLocaleString()}`}</td>
                     <td className="px-6 py-4 font-mono hidden md:table-cell">{`${tx.from.substring(0, 10)}...`}</td>
                     <td className="px-6 py-4 font-mono hidden md:table-cell">{`${tx.to.substring(0, 10)}...`}</td>
                     <td className="px-6 py-4">

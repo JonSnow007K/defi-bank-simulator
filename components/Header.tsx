@@ -1,4 +1,3 @@
-
 import React from 'react';
 import type { UserAccount } from '../types';
 import { WalletIcon, LogoutIcon } from './icons';
@@ -22,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({ account, onConnect, onDisconnect }) => 
           <div className="flex items-center space-x-3 bg-gray-700/50 rounded-full p-2">
             <div className="flex flex-col items-end">
                 <span className="text-sm font-semibold text-white">{formatAddress(account.address)}</span>
-                <span className="text-xs text-green-400 font-mono">${account.balance.toLocaleString()}</span>
+                <span className="text-xs text-green-400 font-mono">₹{account.balance.toLocaleString()}</span>
             </div>
             <button
               onClick={onDisconnect}

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import type { Page } from '../types';
 import { DashboardIcon, TransactionsIcon, GovernanceIcon, SecurityIcon, LogoIcon } from './icons';
